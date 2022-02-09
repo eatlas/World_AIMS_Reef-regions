@@ -26,21 +26,22 @@ remapped from the satellite imagery as the "Mapped Areas" did cover all the sate
 ### 1. Adding Allen Atlas Satellite imagery to QGIS
 The Allen Atlas satellite imagery was added to QGIS by creating two XYZ Tiles layers with the 
 following settings:
-*Title:* Allen Coral Atlas 0 - 12
-*URL:* https://storage.googleapis.com/production-coral-tiles/visual/coral_reefs_2020_visual_v1_mosaic/{z}/{x}/{y}.png
-*Min Zoom Level:* 0
-*Max Zoom Level:* 12
+Layer 1:
+- *Title:* Allen Coral Atlas 0 - 12
+- *URL:* https://storage.googleapis.com/production-coral-tiles/visual/coral_reefs_2020_visual_v1_mosaic/{z}/{x}/{y}.png
+- *Min Zoom Level:* 0
+- *Max Zoom Level:* 12
 
-
-*Title:* Allen Coral Atlas 13 - 15
-*URL:* https://allencoralatlas.org/tiles/planet/visual/2020/{z}/{x}/{y}
-*Min Zoom Level:* 13
-*Max Zoom Level:* 15
+Layer 2:
+- *Title:* Allen Coral Atlas 13 - 15
+- *URL:* https://allencoralatlas.org/tiles/planet/visual/2020/{z}/{x}/{y}
+- *Min Zoom Level:* 13
+- *Max Zoom Level:* 15
 
 Note that this method of connecting to the imagery is not an official method for accessing the 
 Allen Coral Atlas imagery. As a result these URL are likely to break. These URL paths were
 obtained using the web browser developer tools to inspect the URLs requests on the 
-(mapping page)[https://www.allencoralatlas.org/atlas/].
+[mapping page](https://www.allencoralatlas.org/atlas/).
 
 ### 2. Exporting the satellite imagery as a single raster
 To get the extent of the satellite imagery we first export from the tiles to a single raster,
@@ -50,7 +51,7 @@ then convert it to a polygon.
 world in WGS84 / Pseudo-Mercator. 
 3. Add a map to our page, ensuring that it covers the entire page. 
 4. Set the Extents to be -20026376.39 -20048966.10, 20026376.39, 20048966.10. This is from 
-(EPSG:3857 Projected Bounds)[https://epsg.io/3857]
+[EPSG:3857 Projected Bounds](https://epsg.io/3857)
 4. Make sure that the map shows the entire world. The satellite imagery should cover a strip in the middle.
 5. Export as an image (`02-World-Allen-Coral-Atlas-Satellite-2020.png`), ensuring that 'Generate world file' is turned on. 
 Set the export resolution to 8096 x 8096 pixels. 
@@ -62,7 +63,9 @@ Before we convert to a polygon we need to turn the satellite imagery into a bina
 1. Use the `Raster\Raster Calculator`, with expression 
 ```"02-World-Allen-Coral-Atlas-Satellite-2020@1" + 
 "02-World-Allen-Coral-Atlas-Satellite-2020@2" + 
-"02-World-Allen-Coral-Atlas-Satellite-2020@3"<(255+255+255)```.
+"02-World-Allen-Coral-Atlas-Satellite-2020@3"<(255+255+255)
+```
+
 This is intended to mask all areas other than white.
 Set the Output CRS to EPSG:3857 and save it as a GeoTiff, `03-World-satellite-mask`.
 Note: This generates a 256 MB image and so is not included in the repository.
