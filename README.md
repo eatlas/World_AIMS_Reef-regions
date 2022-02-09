@@ -61,21 +61,27 @@ projection information into the image, allowing us to perform reprojections on t
 ### 3. Convert the satellite imagery to a polygon boundary.
 Before we convert to a polygon we need to turn the satellite imagery into a binary mask.
 1. Use the `Raster\Raster Calculator`, with expression 
-```"02-World-Allen-Coral-Atlas-Satellite-2020@1" + 
-"02-World-Allen-Coral-Atlas-Satellite-2020@2" + 
-"02-World-Allen-Coral-Atlas-Satellite-2020@3"<(255+255+255)
-```
+ ```
+ "02-World-Allen-Coral-Atlas-Satellite-2020@1" + 
+ "02-World-Allen-Coral-Atlas-Satellite-2020@2" + 
+ "02-World-Allen-Coral-Atlas-Satellite-2020@3"<(255+255+255)
+ ```
 
-This is intended to mask all areas other than white.
-Set the Output CRS to EPSG:3857 and save it as a GeoTiff, `03-World-satellite-mask`.
-Note: This generates a 256 MB image and so is not included in the repository.
+ This is intended to mask all areas other than white.
+ Set the Output CRS to EPSG:3857 and save it as a GeoTiff, `03-World-satellite-mask`.
+ Note: This generates a 256 MB image and so is not included in the repository.
+
 2. Export the `03-World-satellite-mask.tif` as `03-World-satellite-mask-LZW.tif`, setting
 the 'Create Options' to COMPRESS, LZW. This shrinks the file 100x.
-2. Use the `Raster\Conversion\Polygonize`, with default values, to create a matching polygon. Save to a temporary
-file.
-3. On the new vector layer set the Query Builder to `"DN" = 1` to remove the unwanted areas.
-4. Expand the boundaries by applying a 20 km buffer, followed by a dissolve, followed by -5 km buffer.
-5. Apply a Simplify with 'Distance (Douglas-Peucker)' with a tolerance of 5 km. Save as `03-World-reef-mask.shp`.
+
+3. Use the `Raster\Conversion\Polygonize`, with default values, to create a matching polygon. 
+Save to a temporary file.
+
+4. On the new vector layer set the Query Builder to `"DN" = 1` to remove the unwanted areas.
+
+5. Expand the boundaries by applying a 20 km buffer, followed by a dissolve, followed by -5 km buffer.
+
+6. Apply a Simplify with 'Distance (Douglas-Peucker)' with a tolerance of 5 km. Save as `03-World-reef-mask.shp`.
 
 ### 4. Adjust the mask to include new reefal areas not covered by existing boundaries
 The Allen Coral Atlas doesn't include all areas where reefs exists. As we process these areas we need to expand
@@ -89,21 +95,23 @@ Use the Multipart to Singleparts tool to separate all the polygons into separate
 split. The boundaries used closed followed those used by the Allen Coral Atlas and used the boundaries
 of the seas and oceans as additional guides (IHO 23-3rd: Limits of Oceans and Seas).
 
-Allen Coral Atlas (2022). Imagery, maps and monitoring of the world's tropical coral reefs. doi.org/10.5281/zenodo.3833242
+ Allen Coral Atlas (2022). Imagery, maps and monitoring of the world's tropical coral reefs. doi.org/10.5281/zenodo.3833242
 IHO 23-3rd: Limits of Oceans and Seas, Special Publication 23, 3rd Edition 1953, published by the 
-    International Hydrographic Organization. (https://epic.awi.de/id/eprint/29772/1/IHO1953a.pdf)
+International Hydrographic Organization. (https://epic.awi.de/id/eprint/29772/1/IHO1953a.pdf)
+
 2. Add `Region` and `RegionName` attributes to the shapefile. Copy the region names from the 
 Coral Allen Atlas for where there are matches. Additional names were allocated for regions not
 covered by the exiting Allen Atlas regions. 
+
 3. Export the final edited shapefile as `finaldata\World_AIMS_Reef-regions_V1.shp`. Set the CRS to EPSG:4326.
 
 ### 6. Merge the Reef Regions with the Sentinel 2 regions
 1. Load `src-data\Sentinel-2-Shapefile-Index-master\derived\sentinel_2_index_shapefile_33S-33N-extract.shp`.
 2. Use `Vector\Data Management Tools\Join Attributes by Location ...` with 
-*Base Layer:* `sentinel_2_index_shapefile_33S-33N-extract.shp`
-*Join Layer:* `World_AIMS_Reef-regions_V1.shp`
-*Geometric predicate:* intersects
-*Join type:* Create separate feature for each marching feature (on-to-many)
+ *Base Layer:* `sentinel_2_index_shapefile_33S-33N-extract.shp`
+ *Join Layer:* `World_AIMS_Reef-regions_V1.shp`
+ *Geometric predicate:* intersects
+ *Join type:* Create separate feature for each marching feature (on-to-many)
 Create temporary layer
 3. For the new layer set the Query builder to remove all the non matches (`"Region"`).
 4. Export to `finaldata\World_AIMS_Reef-regions_Sentinel2_V1.shp`
@@ -111,7 +119,7 @@ Create temporary layer
 
 ## Data Dictionary
 `Region`: Full name of the region.
+
 `RegionName`: Folder name to store files associated with this region. This name is of limited length
 to limit problems with file path length.
-
 
