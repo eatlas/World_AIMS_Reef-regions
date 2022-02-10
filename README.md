@@ -16,8 +16,11 @@ performed by the Allen Coral Atlas.
 ![Preview map of reef regions dataset](media/Reef-regions-preview-map.png)
 Preview of the Global reef regions dataset (`World_AIMS_Reef-regions_V1.shp`).
 
-![Preview map of reef regions dataset](media/Reef-regions-sentinel2-preview-map.png)
+![Preview map of sentinel 2 tiles](media/Reef-regions-sentinel2-preview-map.png)
 Preview of the intersecting Senintel 2 tiles (`World_AIMS_Reef-regions_Sentinel2_V1.shp`).
+
+![Detailed map of sentinel 2 tiles](media/Reef-regions-sentinel-2-detailed.jpg)
+Map showing the reef regions and labelled Sentinel 2 tiles. Note this image is large.
 
 ## Change log
 ## 2022-02-10 - V1 - Initial release of the dataset. 
