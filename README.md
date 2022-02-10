@@ -19,7 +19,7 @@ Preview of the Global reef regions dataset (`World_AIMS_Reef-regions_V1.shp`).
 ![Preview map of reef regions dataset](media/Reef-regions-sentinel2-preview-map.png)
 Preview of the intersecting Senintel 2 tiles (`World_AIMS_Reef-regions_Sentinel2_V1.shp`).
 
-# Change log
+## Change log
 ## 2022-02-10 - V1 - Initial release of the dataset. 
 This dataset was developed sufficiently to allow the organisation of files for the 
 [Coral Sea Mapping project](https://eatlas.org.au/projects-other/coral-sea-reef-mapping). As such
@@ -34,13 +34,6 @@ water. The boundaries were then adjusted in tighter around the reefs. The main f
 in the Coral Sea region, reducing the number of tiles by 8. Little review has been undertaken for 
 most of the non-Australian regions and so these should be considered as draft quality.
 
-# Regions
-This dataset describes the regional organisation of the satellite imagery. This
-regionalisation was done to limit the amount of imagery in any one region to a 
-managable level, and to allow people to more readily download relevant imagery.
-
-The regions used are initially based off the regions established in the Allen Coral Atlas.
-Although the regions were adjusted to more evenly balance the imagery and reduce overlap.
 
 ## Method 
 
