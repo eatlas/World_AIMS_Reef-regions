@@ -1,12 +1,38 @@
-# World reef regions
+# Global reef regions
 This dataset represents broad boundaries around all global reefs with a buffer of 
 approximately 30 km around reefs. This boundary map is intended to capture all
-shallow regions where tropical coral reefs might occur. 
+shallow regions where tropical coral reefs might occur and is intended to assist with
+determining areas where satellite imagery needs to be processes to map global reefs.
+The features are split into regions with the purpose of organising global reef mapping 
+into managable areas. 
 
-This dataset was based on the regionalisation and identification of reef locations
-performed by the Allen Coral Atlas. The features are split into regions with the
-purpose of organising global reef mapping into managable areas. 
+This dataset contains two shapefiles:
+1. Global reef regions (`World_AIMS_Reef-regions_V1.shp`) - broad boundary around reefs from -30 degrees to +30 degree latitude.
+2. Sentinel 2 tiles that intersect with each region (`World_AIMS_Reef-regions_Sentinel2_V1.shp`)
 
+This dataset was derived from on the regionalisation and identification of reef locations
+performed by the Allen Coral Atlas. 
+
+![Preview map of reef regions dataset](media/Reef-regions-preview-map.png)
+Preview of the Global reef regions dataset (`World_AIMS_Reef-regions_V1.shp`).
+
+![Preview map of reef regions dataset](media/Reef-regions-sentinel2-preview-map.png)
+Preview of the intersecting Senintel 2 tiles (`World_AIMS_Reef-regions_Sentinel2_V1.shp`).
+
+# Change log
+## 2022-02-10 - V1 - Initial release of the dataset. 
+This dataset was developed sufficiently to allow the organisation of files for the 
+[Coral Sea Mapping project](https://eatlas.org.au/projects-other/coral-sea-reef-mapping). As such
+there has been a greater level of adjustment and optimisation of the boundaries in the Australia
+regions.
+The regional boundaries were heavily based on the Allen Atlas boundaries, but with greater division 
+around australia. The original Timor and Arafura sea region was split in two, and the Timor Sea region extended
+to cover the banks and shoals along the edge of the continental shelf of North West Australia. To minimise
+the number of Sentinel 2 tiles that need to be processed the boundaries were manually reviewed to look for
+areas where the boundary just touched a Sentinel 2 tile. In these cases these tiles would simply be open
+water. The boundaries were then adjusted in tighter around the reefs. The main focus of this work was
+in the Coral Sea region, reducing the number of tiles by 8. Little review has been undertaken for 
+most of the non-Australian regions and so these should be considered as draft quality.
 
 # Regions
 This dataset describes the regional organisation of the satellite imagery. This
